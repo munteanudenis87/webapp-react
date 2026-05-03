@@ -35,6 +35,8 @@ function MoviePage() {
                 </div>
                 <h1>{movie?.title}</h1>
                 <h3 className="text-muted"><i>Director: {movie?.director}</i></h3>
+                <h6 className="text-muted">Genre: {movie?.genre}</h6>
+                <h6 className="text-muted">Release year: {movie?.release_year}</h6>
                 <p>{movie?.abstract}</p>
             </header>
             <section id="reviews">
