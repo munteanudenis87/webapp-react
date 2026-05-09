@@ -4,10 +4,22 @@ import { useState, useEffect } from "react";
 import ReviewsCard from "../components/ReviewsCard";
 import ReviewForm from "../components/ReviewForm";
 
+// import del context per il loader
+import { useGlobal } from "../contexts/GlobalContext";
+
 function MoviePage() {
 
     const redirect = useNavigate();
-    
+
+    // prendiamo dal context il valore che ci serve
+    const {setIsLoading} = useGlobal();
+
+    // funzione di disattivazione loader
+    const loadingFalse = () => {
+        // settiamo il loading attivo
+        setIsLoading(false)
+    }
+
     // recuperiamo id da param dinamico
     const { id } = useParams();
 
@@ -16,12 +28,17 @@ function MoviePage() {
 
     // definiamo funzione chiamata a BE
     const fetchMovie = () => {
+
+        // settiamo il loading attivo
+        setIsLoading(true);
+
         axios.get("http://localhost:3000/api/movies/" + id)
             .then(response => { setMovie(response.data) })
             .catch(err => {
                 console.log(err);
                 if (err.status === 404) redirect('/404')
             })
+            .finally(setTimeout(loadingFalse, 1000))
     }
 
     // definizione funzione rendering reviews
