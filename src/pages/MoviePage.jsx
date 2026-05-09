@@ -1,10 +1,13 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import ReviewsCard from "../components/ReviewsCard";
 import ReviewForm from "../components/ReviewForm";
 
 function MoviePage() {
+
+    const redirect = useNavigate();
+    
     // recuperiamo id da param dinamico
     const { id } = useParams();
 
@@ -17,6 +20,7 @@ function MoviePage() {
             .then(response => { setMovie(response.data) })
             .catch(err => {
                 console.log(err);
+                if (err.status === 404) redirect('/404')
             })
     }
 
