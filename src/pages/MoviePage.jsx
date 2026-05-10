@@ -49,9 +49,26 @@ function MoviePage() {
     // chiamata da useEffect
     useEffect(fetchMovie, []);
 
+    // funzione delete movie
+    const deleteMovie = e => {
+        e.preventDefault();
+
+        axios.delete(`http://localhost:3000/api/movies/${id}`)
+            .then(response => {
+                console.log(response);
+                redirect("/");
+            })
+            .catch((err) => {
+                console.log(err);
+            })            
+            .finally()
+    }
+    //useEffect(deleteMovie, []);
+
     return (
         <>
             <header id="movie" className="border-bottom border-1 mb-3">
+                <div><Link className="btn btn-danger mb-2" to="/" onClick={deleteMovie}>Delete movie</Link></div>
                 <div className="d-flex mb-3">
                     {movie?.image && <img className="movie-img" src={movie?.image} alt={movie?.title} />}
                 </div>

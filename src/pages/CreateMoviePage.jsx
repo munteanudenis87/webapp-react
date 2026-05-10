@@ -15,7 +15,7 @@ function CreateMoviePage() {
         "title": "",
         "director": "",
         "genre": "",
-        "release_year": 1895,
+        "release_year": 1901,
         "abstract": "",
         "image": null
     };
@@ -94,7 +94,7 @@ function CreateMoviePage() {
                             className="form-control"
                             name="release_year"
                             type="number"
-                            min="1895"
+                            min="1901"
                             max="2100"
                             value={formData.release_year}
                             onChange={setFieldValue}
